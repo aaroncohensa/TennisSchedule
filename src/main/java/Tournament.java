@@ -17,6 +17,7 @@ public class Tournament{
     int tO2Dist;
     int tO3Dist;
     int tournid;
+
     public Tournament(int tournID , int week , String tournName, int prizeMoney , int points , int tOption1Dist , int tOption2Dist , int tOption3Dist){
         this.weekNo =week;
         this.name = tournName;
@@ -30,6 +31,7 @@ public class Tournament{
 
 
      public static ArrayList<Tournament> createTournArray(String filePath){
+        int NUM_TOURNS=64;
         File file = new File(filePath);   //creating a new file instance
         FileInputStream fis = null;   //obtaining bytes from the file
         try {
@@ -46,14 +48,14 @@ public class Tournament{
         }
         XSSFSheet sheet = wb.getSheetAt(0);
         Iterator<Row> itr = sheet.iterator();
-        double [] weekNo = new double [64];
-        String [] tournName = new String [64];
-        double [] prizeMoney = new double [64];
-        double [] points = new double [64];
-        double [] tOpt1 = new double [64];
-        double [] tOpt2 = new double [64];
-        double [] tOpt3 = new double [64];
-        int [] tournIDs = new int [64];
+        double [] weekNo = new double [NUM_TOURNS];
+        String [] tournName = new String [NUM_TOURNS];
+        double [] prizeMoney = new double [NUM_TOURNS];
+        double [] points = new double [NUM_TOURNS];
+        double [] tOpt1 = new double [NUM_TOURNS];
+        double [] tOpt2 = new double [NUM_TOURNS];
+        double [] tOpt3 = new double [NUM_TOURNS];
+        int [] tournIDs = new int [NUM_TOURNS];
         while (itr.hasNext())
         {
             Row row = itr.next();
@@ -120,7 +122,7 @@ public class Tournament{
         }
 
         ArrayList<Tournament> tournArray = new ArrayList<Tournament>(); //creating array of tournament object
-        for(int b =0 ; b<64 ; b++){
+        for(int b =0 ; b<NUM_TOURNS ; b++){
             tournArray.add(new Tournament(tournIDs[b] ,(int)weekNo[b] , tournName[b] ,(int) prizeMoney[b] , (int)points[b] ,(int) tOpt1[b] , (int)tOpt2[b] , (int)tOpt3[b]));
         }
         return tournArray;
