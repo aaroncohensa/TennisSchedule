@@ -66,7 +66,7 @@ public class EdgeWeightedDigraph {
                         int cwMoney = currWeek.tMoney;
                         int pwPoints = prevWeek.tPoints;
                         int cwPoints = currWeek.tPoints;
-                        int weight = (pwMoney*cwMoney)+(pwPoints+cwPoints);
+                        long weight = (pwMoney+cwMoney)+(pwPoints+cwPoints);
                         DirectedEdge dEdge = new DirectedEdge(prevWeek , currWeek , weight);
                         addEdge(dEdge);
                         break;
@@ -76,19 +76,19 @@ public class EdgeWeightedDigraph {
                         int cwPoints = currWeek.tPoints;
                         if(counter == 0){ //if first distance
                             int dtoT1 = prevWeek.tO1Dist;
-                            int weight = (3*cwMoney)+(2*cwPoints)-dtoT1;
+                            long weight = (3*cwMoney)+(2*cwPoints)-dtoT1;
                             DirectedEdge dEdge = new DirectedEdge(prevWeek , currWeek , weight);
                             addEdge(dEdge);
                         }
                         if(counter ==1){ //if second distance
                             int dtoT2 = prevWeek.tO2Dist;
-                            int weight = (3*cwMoney)+(2*cwPoints)-dtoT2;
+                            long weight = (3*cwMoney)+(2*cwPoints)-dtoT2;
                             DirectedEdge dEdge = new DirectedEdge(prevWeek , currWeek , weight);
                             addEdge(dEdge);
                         }
                         if (counter==2){ //if third distance
                             int dtoT3= prevWeek.tO3Dist;
-                            int weight = (3*cwMoney)+(2*cwPoints)-dtoT3;
+                            long weight = (3*cwMoney)+(2*cwPoints)-dtoT3;
                             DirectedEdge dEdge = new DirectedEdge(prevWeek , currWeek , weight);
                             addEdge(dEdge);
                         }

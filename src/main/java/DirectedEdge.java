@@ -1,7 +1,7 @@
 public class DirectedEdge {
     private final Tournament v;
     private final Tournament w;
-    private final double weight;
+    private final long weight;
 
     /**
      * Initializes a directed edge from vertex {@code v} to vertex {@code w} with
@@ -13,7 +13,7 @@ public class DirectedEdge {
      *    is a negative integer
      * @throws IllegalArgumentException if {@code weight} is {@code NaN}
      */
-    public DirectedEdge(Tournament v, Tournament w, double weight) {
+    public DirectedEdge(Tournament v, Tournament w, long weight) {
         if (Double.isNaN(weight)) throw new IllegalArgumentException("Weight is NaN");
         this.v = v;
         this.w = w;
