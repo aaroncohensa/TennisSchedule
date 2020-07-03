@@ -131,8 +131,8 @@ public class Tournament{
     public static void main(String[] args) {
 
         EdgeWeightedDigraph digraph = new EdgeWeightedDigraph(createTournArray("/Users/aaroncohen/Downloads/TennisScheduleZip/TS/ATP2020Schedul.xlsx"));
-        digraph.edges();
-        System.out.println(digraph.V());
+        DijkstraSP sp = new DijkstraSP(digraph, 0);
+        System.out.println(sp.pathTo(63));
     }
 }
 

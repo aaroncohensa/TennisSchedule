@@ -62,34 +62,34 @@ public class EdgeWeightedDigraph {
                     if(prevWeek.weekNo == currWeek.weekNo){
                     }
                     else if(currWeek.weekNo == 35){ //last week in the calender
-                        int pwMoney=prevWeek.tMoney;
-                        int cwMoney = currWeek.tMoney;
-                        int pwPoints = prevWeek.tPoints;
-                        int cwPoints = currWeek.tPoints;
-                        long weight = (pwMoney+cwMoney)+(pwPoints+cwPoints);
-                        DirectedEdge dEdge = new DirectedEdge(prevWeek , currWeek , weight);
+                        long pwMoney=prevWeek.tMoney;
+                        long cwMoney = currWeek.tMoney;
+                        long pwPoints = prevWeek.tPoints;
+                        long cwPoints = currWeek.tPoints;
+                        float weight = 1/((pwMoney*cwMoney)+(pwPoints+cwPoints));
+                        DirectedEdge dEdge = new DirectedEdge(prevWeek.tournid , currWeek.tournid , weight);
                         addEdge(dEdge);
                         break;
                     }
                     else if(prevWeek.weekNo == (currWeek.weekNo-1)){ //checking if in next week
-                        int cwMoney = currWeek.tMoney;
-                        int cwPoints = currWeek.tPoints;
+                        long cwMoney = currWeek.tMoney;
+                        long cwPoints = currWeek.tPoints;
                         if(counter == 0){ //if first distance
-                            int dtoT1 = prevWeek.tO1Dist;
-                            long weight = (3*cwMoney)+(2*cwPoints)-dtoT1;
-                            DirectedEdge dEdge = new DirectedEdge(prevWeek , currWeek , weight);
+                            long dtoT1 = prevWeek.tO1Dist;
+                            float weight = 1/((3*cwMoney)+(2*cwPoints)-dtoT1);
+                            DirectedEdge dEdge = new DirectedEdge(prevWeek.tournid , currWeek.tournid , weight);
                             addEdge(dEdge);
                         }
                         if(counter ==1){ //if second distance
-                            int dtoT2 = prevWeek.tO2Dist;
-                            long weight = (3*cwMoney)+(2*cwPoints)-dtoT2;
-                            DirectedEdge dEdge = new DirectedEdge(prevWeek , currWeek , weight);
+                            long dtoT2 = prevWeek.tO2Dist;
+                            float weight = 1/((3*cwMoney)+(2*cwPoints)-dtoT2);
+                            DirectedEdge dEdge = new DirectedEdge(prevWeek.tournid , currWeek.tournid , weight);
                             addEdge(dEdge);
                         }
                         if (counter==2){ //if third distance
-                            int dtoT3= prevWeek.tO3Dist;
-                            long weight = (3*cwMoney)+(2*cwPoints)-dtoT3;
-                            DirectedEdge dEdge = new DirectedEdge(prevWeek , currWeek , weight);
+                            long dtoT3= prevWeek.tO3Dist;
+                            float weight = 1/((3*cwMoney)+(2*cwPoints)-dtoT3);
+                            DirectedEdge dEdge = new DirectedEdge(prevWeek.tournid , currWeek.tournid , weight);
                             addEdge(dEdge);
                         }
 
@@ -161,10 +161,10 @@ public class EdgeWeightedDigraph {
      *         and {@code V-1}
      */
     public void addEdge(DirectedEdge e) {
-        Tournament v = e.from();
-        Tournament w = e.to();
-        adj[v.tournid].add(e);
-        indegree[w.tournid]++;
+        int v = e.from();
+        int w = e.to();
+        adj[v].add(e);
+        indegree[w]++;
         E++;
     }
 
@@ -242,9 +242,5 @@ public class EdgeWeightedDigraph {
         }
         return s.toString();
     }
-
-
-
-
 
 }

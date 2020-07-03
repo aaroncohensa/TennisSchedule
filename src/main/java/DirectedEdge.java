@@ -1,7 +1,29 @@
+/******************************************************************************
+ *  Compilation:  javac DirectedEdge.java
+ *  Execution:    java DirectedEdge
+ *  Dependencies: StdOut.java
+ *
+ *  Immutable weighted directed edge.
+ *
+ ******************************************************************************/
+/**
+ *  The {@code DirectedEdge} class represents a weighted edge in an
+ *  {@link EdgeWeightedDigraph}. Each edge consists of two integers
+ *  (naming the two vertices) and a real-value weight. The data type
+ *  provides methods for accessing the two endpoints of the directed edge and
+ *  the weight.
+ *  <p>
+ *  For additional documentation, see <a href="https://algs4.cs.princeton.edu/44sp">Section 4.4</a> of
+ *  <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
+ *
+ *  @author Robert Sedgewick
+ *  @author Kevin Wayne
+ */
+
 public class DirectedEdge {
-    private final Tournament v;
-    private final Tournament w;
-    private final long weight;
+    private final int v;
+    private final int w;
+    private final float weight;
 
     /**
      * Initializes a directed edge from vertex {@code v} to vertex {@code w} with
@@ -13,7 +35,9 @@ public class DirectedEdge {
      *    is a negative integer
      * @throws IllegalArgumentException if {@code weight} is {@code NaN}
      */
-    public DirectedEdge(Tournament v, Tournament w, long weight) {
+    public DirectedEdge(int v, int w, float weight) {
+        if (v < 0) throw new IllegalArgumentException("Vertex names must be nonnegative integers");
+        if (w < 0) throw new IllegalArgumentException("Vertex names must be nonnegative integers");
         if (Double.isNaN(weight)) throw new IllegalArgumentException("Weight is NaN");
         this.v = v;
         this.w = w;
@@ -24,7 +48,7 @@ public class DirectedEdge {
      * Returns the tail vertex of the directed edge.
      * @return the tail vertex of the directed edge
      */
-    public Tournament from() {
+    public int from() {
         return v;
     }
 
@@ -32,7 +56,7 @@ public class DirectedEdge {
      * Returns the head vertex of the directed edge.
      * @return the head vertex of the directed edge
      */
-    public Tournament to() {
+    public int to() {
         return w;
     }
 
