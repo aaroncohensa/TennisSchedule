@@ -13,19 +13,23 @@ public class Tournament{
     String name;
     int tMoney;
     int tPoints;
-    int tO1Dist;
-    int tO2Dist;
-    int tO3Dist;
+//    int tO1Dist;
+//    int tO2Dist;
+//    int tO3Dist;
     int tournid;
+    double longitude;
+    double latitude;
 
-    public Tournament(int tournID , int week , String tournName, int prizeMoney , int points , int tOption1Dist , int tOption2Dist , int tOption3Dist){
+    public Tournament(int tournID , int week , String tournName, int prizeMoney , int points , double longi , double latit){
         this.weekNo =week;
         this.name = tournName;
         this.tMoney= prizeMoney;
         this.tPoints= points;
-        this.tO1Dist= tOption1Dist;
-        this.tO2Dist= tOption2Dist;
-        this.tO3Dist= tOption3Dist;
+//        this.tO1Dist= tOption1Dist;
+////        this.tO2Dist= tOption2Dist;
+////        this.tO3Dist= tOption3Dist;
+        this.longitude = longi;
+        this.latitude = latit;
         this.tournid = tournID;
     }
 
@@ -52,9 +56,9 @@ public class Tournament{
         String [] tournName = new String [NUM_TOURNS];
         double [] prizeMoney = new double [NUM_TOURNS];
         double [] points = new double [NUM_TOURNS];
-        double [] tOpt1 = new double [NUM_TOURNS];
-        double [] tOpt2 = new double [NUM_TOURNS];
-        double [] tOpt3 = new double [NUM_TOURNS];
+        double [] longiArray = new double [NUM_TOURNS];
+        double [] latArray = new double [NUM_TOURNS];
+//        double [] tOpt3 = new double [NUM_TOURNS];
         int [] tournIDs = new int [NUM_TOURNS];
         while (itr.hasNext())
         {
@@ -102,35 +106,31 @@ public class Tournament{
                         z++;
                         break;
                     case 5:
-                        double to1D = cell.getNumericCellValue();
-                        tOpt1[w]=to1D;
+                        String doubLongStr = cell.getStringCellValue();
+                        double doubLong = Double.parseDouble(doubLongStr);
+                        longiArray[w]=doubLong;
                         w++;
                         break;
                     case 6:
-                        double to2D = cell.getNumericCellValue();
-                        tOpt2[v]=to2D;
+                        String doubLatStr = cell.getStringCellValue();
+                        double doubLat = Double.parseDouble(doubLatStr);
+                        latArray[v]=doubLat;
                         v++;
                         break;
-                    case 7:
-                        double to3D = cell.getNumericCellValue();
-                        tOpt3[a]=to3D;
-                        a++;
-                        break;
-                    default:
                 }
             }
         }
 
         ArrayList<Tournament> tournArray = new ArrayList<Tournament>(); //creating array of tournament object
         for(int b =0 ; b<NUM_TOURNS ; b++){
-            tournArray.add(new Tournament(tournIDs[b] ,(int)weekNo[b] , tournName[b] ,(int) prizeMoney[b] , (int)points[b] ,(int) tOpt1[b] , (int)tOpt2[b] , (int)tOpt3[b]));
+            tournArray.add(new Tournament(tournIDs[b] ,(int)weekNo[b] , tournName[b] ,(int) prizeMoney[b] , (int)points[b] , longiArray[b] , latArray[b]));
         }
         return tournArray;
     }
 
     public static void main(String[] args) {
 
-        EdgeWeightedDigraph digraph = new EdgeWeightedDigraph(createTournArray("/Users/aaroncohen/Downloads/TennisScheduleZip/TS/ATP2020Schedul.xlsx"));
+        EdgeWeightedDigraph digraph = new EdgeWeightedDigraph(createTournArray("/Users/aaroncohen/Downloads/ATP2020ScheduleUpdate.xlsx"));
         DijkstraSP sp = new DijkstraSP(digraph, 0);
         System.out.println(sp.pathTo(63));
     }

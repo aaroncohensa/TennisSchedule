@@ -23,7 +23,7 @@
 public class DirectedEdge {
     private final int v;
     private final int w;
-    private final float weight;
+    private final double weight;
 
     /**
      * Initializes a directed edge from vertex {@code v} to vertex {@code w} with
@@ -35,7 +35,7 @@ public class DirectedEdge {
      *    is a negative integer
      * @throws IllegalArgumentException if {@code weight} is {@code NaN}
      */
-    public DirectedEdge(int v, int w, float weight) {
+    public DirectedEdge(int v, int w, double weight) {
         if (v < 0) throw new IllegalArgumentException("Vertex names must be nonnegative integers");
         if (w < 0) throw new IllegalArgumentException("Vertex names must be nonnegative integers");
         if (Double.isNaN(weight)) throw new IllegalArgumentException("Weight is NaN");
@@ -73,6 +73,6 @@ public class DirectedEdge {
      * @return a string representation of the directed edge
      */
     public String toString() {
-        return v + "->" + w + " " + String.format("%5.2f", weight);
+        return v + "->" + w + " " + String.format("%.7f", weight);
     }
 }
