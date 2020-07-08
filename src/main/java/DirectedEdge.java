@@ -73,6 +73,6 @@ public class DirectedEdge {
      * @return a string representation of the directed edge
      */
     public String toString() {
-        return v + "->" + w + " " + String.format("%.7f", weight);
+        return Tournament.getTournName(v) + "->" + Tournament.getTournName(w) + " " + "(" + String.format("%.7f", weight) + ")" + "\n"+"\n"+"\n";
     }
 }

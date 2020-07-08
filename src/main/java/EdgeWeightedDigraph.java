@@ -66,7 +66,7 @@ public class EdgeWeightedDigraph {
                         long cwMoney = currWeek.tMoney;
                         long pwPoints = prevWeek.tPoints;
                         long cwPoints = currWeek.tPoints;
-                        float weight = 1/((pwMoney*cwMoney)+(pwPoints+cwPoints));
+                        double weight = 100000/((pwMoney*cwMoney)+(pwPoints+cwPoints));
                         DirectedEdge dEdge = new DirectedEdge(prevWeek.tournid , currWeek.tournid , weight);
                         addEdge(dEdge);
                         break;

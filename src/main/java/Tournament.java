@@ -7,6 +7,8 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+
+
 public class Tournament{
 
     int weekNo;
@@ -31,8 +33,10 @@ public class Tournament{
         this.longitude = longi;
         this.latitude = latit;
         this.tournid = tournID;
+
     }
 
+    static ArrayList<Tournament> tournArray = new ArrayList<Tournament>(); //creating array of tournament object
 
      public static ArrayList<Tournament> createTournArray(String filePath){
         int NUM_TOURNS=64;
@@ -121,11 +125,18 @@ public class Tournament{
             }
         }
 
-        ArrayList<Tournament> tournArray = new ArrayList<Tournament>(); //creating array of tournament object
+
         for(int b =0 ; b<NUM_TOURNS ; b++){
             tournArray.add(new Tournament(tournIDs[b] ,(int)weekNo[b] , tournName[b] ,(int) prizeMoney[b] , (int)points[b] , longiArray[b] , latArray[b]));
         }
+
         return tournArray;
+    }
+
+    public static String getTournName(int tournID){
+        Tournament tourn = tournArray.get(tournID);
+        String tourName = tourn.name;
+        return tourName;
     }
 
     public static void main(String[] args) {
